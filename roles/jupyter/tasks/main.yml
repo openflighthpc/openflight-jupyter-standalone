@@ -1,12 +1,16 @@
 - name: Generate Jupyter Configuration
+  become_user: "{{ default_username }}"
+  become: yes
   command: "jupyter server --generate-config"
+  args:
+    creates: '/home/{{ default_username }}/.jupyter/jupyter_server_config.py'
 
 - name: Generate User Password Hash
-  command: "python3.9 -c 'from jupyter_server.auth import passwd ; print(passwd("{{ default_user_password }}"))'"
+  command: python3.9 -c "from jupyter_server.auth import passwd ; print(passwd('{{ default_user_password }}'))"
   register: password_hash
 
 - name: Set Jupyter Lab Password
-  lineinefile:
+  lineinfile:
     path: "/home/{{ default_username }}/.jupyter/jupyter_server_config.py"
     state: present
     regexp: '^c.ServerApp.password'
