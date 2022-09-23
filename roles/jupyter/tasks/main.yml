@@ -1,6 +1,8 @@
 - name: Generate Jupyter Configuration
   become_user: "{{ default_username }}"
   become: yes
+  become_method: su
+  become_flags: '--login'
   command: "jupyter server --generate-config"
   args:
     creates: '/home/{{ default_username }}/.jupyter/jupyter_server_config.py'
