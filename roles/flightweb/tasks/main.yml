@@ -8,7 +8,7 @@
     removes: /opt/flight/opt/www/landing-page/default/content/apps/job-script.md
 
 - name: Install Jupyter Web-Suite Application
-  cp:
+  template:
     src: templates/jupyter-lab.md
     dest: /opt/flight/opt/www/landing-page/default/content/apps/jupyter-lab.md
 
