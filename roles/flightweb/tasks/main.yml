@@ -12,6 +12,11 @@
     src: templates/jupyter-lab.md
     dest: /opt/flight/opt/www/landing-page/default/content/apps/jupyter-lab.md
 
+- name: Install Jupyter Web-Suite Logo
+  copy:
+    file: files/jupyter-lab.png
+    dest: /opt/flight/opt/www/landing-page/default/content/images/jupyter-lab.png
+
 - name: Can Successfully Generate Let's Encrypt certificate?
   command: "/opt/flight/bin/flight www cert-gen --cert-type lets-encrypt --domain {{ access_host }} --email certs@openflighthpc.org"
   register: letsencryptout
